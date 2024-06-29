@@ -5,28 +5,28 @@
       "title": "mock title1",
       "content": "mock data1 ",
       "author": "mock author1",
-      "date": "mock date1"
+      "date": "01-11-2024"
     },
     {
       "id": "2",
       "title": "fake title2",
       "content": "mock data2",
       "author": "mock author2",
-      "date": "mock date2"
+      "date": "01-11-2024"
     },
     {
       "id": "3",
       "title": "mock title3",
       "content": "mock data3",
       "author": "mock author3",
-      "date": "mock date3"
+      "date": "01-11-2024"
     },
     {
       "id": "4",
       "title": "mock title4",
       "content": "mock data4 ",
       "author": "mock author4",
-      "date": "mock date4s"
+      "date": "01-11-2024"
     }
   ]
 }
