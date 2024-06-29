@@ -10,17 +10,57 @@ import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home(props: any) {
-  const postsHolder = [...props.posts.posts];
-  console.log(postsHolder);
-  const postItems = postsHolder.map((post) => (
-    <Post
-      id={post.id}
-      title={post.title}
-      content={post.content}
-      author={post.author}
-      date={post.date}
-    />
-  ));
+  const [PostsList, setPostsList] = useState<Array<any>>([
+    ...props.posts.posts,
+  ]);
+
+  const [postItems, setPostItems] = useState(
+    PostsList.map((post) => (
+      <Post
+        id={post.id}
+        title={post.title}
+        content={post.content}
+        author={post.author}
+        date={post.date}
+      />
+    ))
+  );
+
+  const initialList = [...props.posts.posts];
+
+  console.log("initial list ", initialList);
+  const changeHandler = (event: any) => {
+    if (event.target.value === "") {
+      console.log("filter is empty");
+      setPostsList([...initialList]);
+      setPostItems(initialList.map((post) => (
+        <Post
+          id={post.id}
+          title={post.title}
+          content={post.content}
+          author={post.author}
+          date={post.date}
+        />
+      )));
+    } else {
+      const filteredList = PostsList.filter((post) => {
+        return post.title.startsWith(event.target.value);
+      });
+      setPostsList([...filteredList]);
+      setPostItems(
+        filteredList.map((post) => (
+          <Post
+            id={post.id}
+            title={post.title}
+            content={post.content}
+            author={post.author}
+            date={post.date}
+          />
+        ))
+      );
+    }
+  };
+
   return (
     <>
       <Head>
@@ -32,11 +72,21 @@ export default function Home(props: any) {
       <>
         <NavigationBar>
           <NavigationList>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/contact">Contact Us</Link></li>
-            <li><Link href="/careers">Careers</Link></li>
-            <li><Link href="/products">Products</Link></li>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact Us</Link>
+            </li>
+            <li>
+              <Link href="/careers">Careers</Link>
+            </li>
+            <li>
+              <Link href="/products">Products</Link>
+            </li>
           </NavigationList>
+
+          <input type="text" name="filter" onChange={changeHandler} />
         </NavigationBar>
         {postItems}
       </>
