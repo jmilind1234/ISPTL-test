@@ -1,6 +1,7 @@
 import Post from "@/components/Post";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 function PagePerPost() {
   const router = useRouter();
@@ -24,7 +25,20 @@ function PagePerPost() {
 
     postGetter(router.query.id);
   }, [author, content, date, title]);
-  return <Post author={author} title={title} date={date} content={content} />;
+  return (
+    <>
+      <Head>
+        <title>Post {router.query.id}</title>
+        <meta
+          name="description"
+          content={`This is mock post ${router.query.id} page`}
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Post author={author} title={title} date={date} content={content} />
+    </>
+  );
 }
 
 export default PagePerPost;
